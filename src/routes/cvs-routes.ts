@@ -1,9 +1,23 @@
 import e, { Request, Response } from "express";
+import { CertificateRes } from "../types";
+import { handleCreateCert } from "../controllers/cvs-controller";
 
-const csvRouter = e.Router();
+const cvsRouter = e.Router();
 
-csvRouter.get("/", (req: Request, res: Response) => {
-  console.log(req.body)
-  res.send("Hello World!");
-})
-export default csvRouter;
+cvsRouter.post(
+  "/",
+  async (req: Request<{}, {}, CertificateRes>, res: Response) => {
+    const certUrl = await handleCreateCert(req.body);
+    if (!certUrl) {
+      res.json({
+        certUrl: "",
+        error: "Certificate not created",
+      });
+      return;
+    }
+    res.json({
+      certUrl,
+    });
+  }
+);
+export default cvsRouter;

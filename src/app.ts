@@ -1,5 +1,5 @@
 import e from "express";
-import csvRouter from "./routes/csvIndex";
+import cvsRouter from "./routes/csvIndex";
 import loginRouter from "./routes/loginIndex";
 import { checkAPI } from "./middleware";
 import MongoStore from "connect-mongo";
@@ -32,9 +32,7 @@ app.use(
     store: store,
   })
 );
-const allowedOrigins = [
-  "http://localhost:3000",
-];
+const allowedOrigins = ["http://localhost:3000"];
 app.use(
   cors({
     credentials: true,
@@ -56,7 +54,7 @@ app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 app.use(checkAPI);
 // adding login temporarily here
-app.use('/', loginRouter, )
-app.use("/cvs-service/api", csvRouter);
+app.use("/", loginRouter);
+app.use("/cvs-service/api", cvsRouter);
 
 export default app;
