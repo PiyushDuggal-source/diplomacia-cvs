@@ -10,9 +10,12 @@ export const handleCreateCert = async (certBody: CertificateRes) => {
     return undefined;
   }
 
-  const certUrl = `https://localhost:3000/certificates/${qrCodeSlang}`;
+  const certUrl = `https://localhost:3000/certificates/${qrCodeSlang.qrCodeSlang}`;
   console.log(`Certificate created for ${certBody.name} at ${certUrl}`);
 
   console.log("Leaving handleCreateCert\n");
-  return certUrl;
+  return {
+    qrCodeSlang: qrCodeSlang.qrCodeSlang,
+    name: qrCodeSlang.name,
+  };
 };

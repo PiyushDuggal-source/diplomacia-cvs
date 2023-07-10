@@ -7,16 +7,16 @@ const cvsRouter = e.Router();
 cvsRouter.post(
   "/",
   async (req: Request<{}, {}, CertificateRes>, res: Response) => {
-    const certUrl = await handleCreateCert(req.body);
-    if (!certUrl) {
-      res.json({
-        certUrl: "",
+    const certData = await handleCreateCert(req.body);
+    if (!certData) {
+      res.status(500).json({
+        certData: undefined,
         error: "Certificate not created",
       });
       return;
     }
     res.json({
-      certUrl,
+      certData,
     });
   }
 );

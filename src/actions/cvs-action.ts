@@ -3,7 +3,7 @@ import { Certificate } from "../models";
 
 export const createCertificate = async (
   certData: CertificateRes
-): Promise<string | undefined> => {
+): Promise<{qrCodeSlang: string, name: string} | undefined> => {
   console.log("\nEntering createCertificate");
   const certificate = await Certificate.create({
     name: certData.name,
@@ -19,5 +19,8 @@ export const createCertificate = async (
   }
 
   console.log("Leaving createCertificate\n");
-  return certificate.qrCodeSlang;
+  return {
+    qrCodeSlang: certificate.qrCodeSlang,
+    name: certificate.name,
+  }
 };
