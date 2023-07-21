@@ -1,4 +1,5 @@
 import { createCertificate } from "../actions/cvs-action";
+import { Certificate } from "../models";
 import { CertificateRes } from "../types";
 
 export const handleCreateCert = async (certBody: CertificateRes) => {
@@ -15,7 +16,21 @@ export const handleCreateCert = async (certBody: CertificateRes) => {
 
   console.log("Leaving handleCreateCert\n");
   return {
-    qrCodeSlang: qrCodeSlang.qrCodeSlang,
+    qrCodeUrl: certUrl,
     name: qrCodeSlang.name,
   };
+};
+
+export const handleGetCert = async (qrCodeSlang: string) => {
+  console.log("\nEntering handleGetCert");
+  const certificate = await Certificate.findOne({
+    qrCodeSlang: qrCodeSlang,
+  });
+
+  if(!certificate) {
+    console.log(`Certificate not found for ${qrCodeSlang}`);
+    return undefined;
+  }
+  console.log("Leaving handleGetCert\n");
+  return certificate;
 };
