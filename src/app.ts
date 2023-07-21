@@ -18,7 +18,7 @@ const store = MongoStore.create({
 });
 // cookie parser middleware
 app.use(cookieParser());
-
+app.set("trust proxy", 1);
 app.use(
   session({
     secret: "keepSummerSafe",
