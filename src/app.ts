@@ -30,7 +30,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
     },
     store: store,
-  })
+  }),
 );
 const allowedOrigins = ["http://localhost:3000"];
 app.use(
@@ -48,13 +48,16 @@ app.use(
       }
       return callback(null, true);
     },
-  })
+  }),
 );
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 app.use(checkAPI);
 // adding login temporarily here
 app.use("/", loginRouter);
+app.get("/", (_req, res) => {
+  res.json({ success: true });
+});
 app.use("/cvs-service/api", cvsRouter);
 
 export default app;
