@@ -32,7 +32,7 @@ app.use(
     store: store,
   }),
 );
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["http://localhost:3000", 'https://iitmdiplomacia.in'];
 app.use(
   cors({
     credentials: true,
