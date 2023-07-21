@@ -27,11 +27,12 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
+      secure: true,
     },
     store: store,
   }),
 );
-const allowedOrigins = ["http://localhost:3000", 'https://iitmdiplomacia.in'];
+const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in"];
 app.use(
   cors({
     credentials: true,
