@@ -4,11 +4,11 @@ import { handleCreateCert, handleGetCert } from "../controllers/cvs-controller";
 
 const cvsRouter = e.Router();
 
-cvsRouter.get("/getcert", async (req: Request, res: Response) => {
-  const { qrCodeSlang } = req.body;
+cvsRouter.get("/getcert/:id", async (req: Request, res: Response) => {
+  const { id: qrCodeSlang } = req.params;
 
   if (!qrCodeSlang) {
-    res.status(500).json({
+    res.status(404).json({
       certData: undefined,
       error: "Certificate not found",
     });
@@ -18,7 +18,7 @@ cvsRouter.get("/getcert", async (req: Request, res: Response) => {
   const certData = await handleGetCert(qrCodeSlang);
 
   if (!certData) {
-    res.status(500).json({
+    res.status(404).json({
       certData: undefined,
       error: "Certificate not found",
     });
@@ -26,7 +26,7 @@ cvsRouter.get("/getcert", async (req: Request, res: Response) => {
   }
 
   res.json({
-    certData,
+    certData
   });
 });
 
@@ -35,7 +35,7 @@ cvsRouter.post(
   async (req: Request<{}, {}, CertificateRes>, res: Response) => {
     const certData = await handleCreateCert(req.body);
     if (!certData) {
-      res.status(500).json({
+      res.json({
         certData: undefined,
         error: "Certificate not created",
       });

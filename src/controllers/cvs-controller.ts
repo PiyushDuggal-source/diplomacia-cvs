@@ -11,7 +11,7 @@ export const handleCreateCert = async (certBody: CertificateRes) => {
     return undefined;
   }
 
-  const certUrl = `https://localhost:3000/certificates/${qrCodeSlang.qrCodeSlang}`;
+  const certUrl = `https://iitmdiplomacia.in/cert/${qrCodeSlang.qrCodeSlang}`;
   console.log(`Certificate created for ${certBody.name} at ${certUrl}`);
 
   console.log("Leaving handleCreateCert\n");
@@ -27,7 +27,7 @@ export const handleGetCert = async (qrCodeSlang: string) => {
     qrCodeSlang: qrCodeSlang,
   });
 
-  if(!certificate) {
+  if (!certificate) {
     console.log(`Certificate not found for ${qrCodeSlang}`);
     return undefined;
   }
