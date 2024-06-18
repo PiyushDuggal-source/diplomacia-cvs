@@ -1,4 +1,5 @@
 import e from "express";
+import dotenv from "dotenv";
 import cvsRouter from "./routes/csvIndex";
 import loginRouter from "./routes/loginIndex";
 import { checkAPI } from "./middleware";
@@ -6,10 +7,11 @@ import MongoStore from "connect-mongo";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+dotenv.config();
 
 const app = e();
 
-const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/cvs-service";
+const DB_URL = process.env.DB_URL;
 
 const store = MongoStore.create({
   mongoUrl: DB_URL,
@@ -27,8 +29,7 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
-      secure: true,
-      sameSite: "none",
+      sameSite: process.env.DEV ? true : "none",
     },
     store: store,
   }),
