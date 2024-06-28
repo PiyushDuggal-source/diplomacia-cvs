@@ -34,7 +34,7 @@ app.use(
     store: store,
   }),
 );
-const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in", "https://www.iitmdiplomacia.in", "https://diplomacia-cvs.onrender.com"];
+const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in", "https://www.iitmdiplomacia.in"];
 app.use(
   cors({
     credentials: true,
