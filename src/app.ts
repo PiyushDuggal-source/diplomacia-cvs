@@ -2,11 +2,13 @@ import e from "express";
 import dotenv from "dotenv";
 import cvsRouter from "./routes/csvIndex";
 import loginRouter from "./routes/loginIndex";
+import pingRoute from "./routes/pingRoute";
 import { checkAPI } from "./middleware";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 
 const app = e();
@@ -26,15 +28,17 @@ app.use(
     secret: "keepSummerSafe",
     resave: true,
     saveUninitialized: false,
+    name: uuidv4(),
     cookie: {
       httpOnly: true,
+      secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
       sameSite: process.env.DEV ? true : "none",
     },
     store: store,
   }),
 );
-const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in", "https://www.iitmdiplomacia.in"];
+const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in", "https://www.iitmdiplomacia.in", "https://diplomacia-cvs.onrender.com"];
 app.use(
   cors({
     credentials: true,
@@ -56,6 +60,7 @@ app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 app.use(checkAPI);
 // adding login temporarily here
+app.use("/", pingRoute);
 app.use("/", loginRouter);
 app.get("/", (_req, res) => {
   res.json({ success: true });

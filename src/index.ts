@@ -6,7 +6,7 @@ import axios from "axios";
 dotenv.config();
 
 const intervalId = setInterval(async () => {
-  await axios.get("https://diplomacia-cvs.onrender.com");
+  await axios.get("https://diplomacia-cvs.onrender.com/ping");
   console.log("[SERVER] Pinged server");
 }, 4.5 * 60 * 1000); // every 4.5 minutes
 
