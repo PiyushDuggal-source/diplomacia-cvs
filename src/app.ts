@@ -30,7 +30,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      // secure: true,
+      secure: true,
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
     },
