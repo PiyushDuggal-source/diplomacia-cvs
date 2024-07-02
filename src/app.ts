@@ -30,10 +30,8 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
     },
-
     store: store,
   }),
 );
