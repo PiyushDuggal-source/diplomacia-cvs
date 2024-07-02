@@ -19,6 +19,7 @@ const store = MongoStore.create({
   mongoUrl: DB_URL,
   ttl: 1000 * 60 * 60 * 24 * 1, // 1 day
   collectionName: "cookieSessions",
+  autoRemove: "interval",
 });
 // cookie parser middleware
 app.use(cookieParser());
@@ -31,8 +32,8 @@ app.use(
     cookie: {
       // secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
-      sameSite: process.env.DEV ? true : "none",
     },
+
     store: store,
   }),
 );
