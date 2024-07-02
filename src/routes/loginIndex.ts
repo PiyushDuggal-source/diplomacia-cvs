@@ -1,8 +1,8 @@
 import e from "express";
-import loginRouter from "./login-routes";
+import { loginUser } from "./login-routes";
 
 const router = e.Router();
 
-router.use("/", loginRouter);
+router.use("/",loginUser);
 
 export default router;

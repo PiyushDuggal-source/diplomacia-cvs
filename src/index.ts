@@ -3,10 +3,14 @@ import * as dotenv from "dotenv";
 import { connectToDB } from "./utils/db";
 import axios from "axios";
 
-dotenv.config();
+// dotenv.config();
+
+dotenv.config({
+  path: "./.env",
+});
 
 const intervalId = setInterval(async () => {
-  await axios.get("https://diplomacia-cvs.onrender.com/ping");
+  // await axios.get("https://diplomacia-cvs.onrender.com/ping");
   console.log("[SERVER] Pinged server");
 }, 4.5 * 60 * 1000); // every 4.5 minutes
 
