@@ -30,8 +30,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      secure: true,
-      sameSite: "none",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
     },
 
@@ -39,7 +38,7 @@ app.use(
   }),
 );
 const allowedOrigins = [
-  "https://localhost:3000",
+  "http://localhost:3000",
   "https://iitmdiplomacia.in",
   "https://www.iitmdiplomacia.in",
 ];
