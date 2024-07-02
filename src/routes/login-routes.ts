@@ -2,7 +2,6 @@ import e, { Request, Response } from "express";
 import { User } from "../models";
 import { checkPassword } from "../controllers/user-controller";
 import { v4 as uuidv4 } from "uuid";
-import session from "express-session";
 
 declare module "express-session" {
   export interface SessionData {
@@ -15,6 +14,14 @@ type RequestBody = {
   email: string;
   password: string;
 };
+
+loginRouter.get("/me", (req: Request, res: Response) => {
+  if (req.session.session) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
+});
 
 loginRouter.post(
   "/login",
@@ -39,11 +46,4 @@ loginRouter.post(
   }
 );
 
-loginRouter.get("/me", (req: Request, res: Response) => {
-  if (req.session.session) {
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  }
-});
 export default loginRouter;

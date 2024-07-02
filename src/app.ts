@@ -28,21 +28,23 @@ app.use(
     secret: "keepSummerSafe",
     resave: true,
     saveUninitialized: false,
-    name: uuidv4(),
     cookie: {
-      httpOnly: true,
-      secure: true,
+      // secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 1, // 1 day
       sameSite: process.env.DEV ? true : "none",
     },
     store: store,
   }),
 );
-const allowedOrigins = ["http://localhost:3000", "https://iitmdiplomacia.in", "https://www.iitmdiplomacia.in"];
+const allowedOrigins = [
+  "https://localhost:3000",
+  "https://iitmdiplomacia.in",
+  "https://www.iitmdiplomacia.in",
+];
 app.use(
   cors({
     credentials: true,
-    origin: function (origin, callback) {
+    origin: function(origin, callback) {
       // allow requests with no origin
       // (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
@@ -59,12 +61,9 @@ app.use(
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 app.use(checkAPI);
-// adding login temporarily here
 app.use("/", pingRoute);
+// adding login temporarily here
 app.use("/", loginRouter);
-app.get("/", (_req, res) => {
-  res.json({ success: true });
-});
 app.use("/cvs-service/api", cvsRouter);
 
 export default app;
