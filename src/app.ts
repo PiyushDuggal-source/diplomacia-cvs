@@ -59,8 +59,8 @@ app.use(
 );
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
-app.use(checkAPI);
 app.use("/", pingRoute);
+app.use(checkAPI);
 // adding login temporarily here
 app.use("/", loginRouter);
 app.use("/cvs-service/api", cvsRouter);
